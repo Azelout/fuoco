@@ -1,0 +1,3 @@
+- Clean code
+- Ranger les dossiers
+- Fix bug augmentation

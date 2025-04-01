@@ -1,0 +1,10 @@
+/.env/
+/config/config.yaml
+/data/
+/results/
+*.jpg
+*.png
+*.jpeg
+*.keras
+*.h5
+*.json
