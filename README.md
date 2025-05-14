@@ -1,6 +1,6 @@
 # Détection de Départ d'Incendie en Cuisine
 
-![Bannière Lycée Raspail](https://extranet.lyc-raspail.ac-paris.fr/banniere.jpg)
+![Bannière Lycée Raspail](https://i.imgur.com/HIUteQk.png)
 
 ## Présentation du Projet
 
