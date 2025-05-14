@@ -1,7 +1,4 @@
-/.env/
-/config/config.yaml
-/data/
-/results/
+.env/
 *.jpg
 *.png
 *.jpeg
