@@ -9,7 +9,7 @@ from config import config
 from os.path import basename
 from os import listdir
 
-seuil = 0.15
+seuil = 0.150
 model_name = config["results"]["model_name"]
 
 def prepare_image(image_path, target_size=(128, 128)):
