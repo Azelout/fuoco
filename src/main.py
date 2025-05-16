@@ -90,7 +90,7 @@ def affichage_resultat1(original_image, predicted_mask_resized, predicted_mask):
     plt.figure(figsize=(12, 6))
     # Image d'origine
     plt.subplot(1, 2, 1)
-    plt.title(f"Image d'origine ({original_image.info['filename']})")
+    plt.title(f"Image d'origine ({original_image.filename})")
     plt.imshow(original_image)
     plt.axis('off')
 
@@ -166,4 +166,4 @@ def heatmap(original_image, predicted_mask_resized, predicted_mask):
     return
 
 if __name__ == "__main__":
-    prediction(affichage=affichage_resultat2)
+    prediction(affichage=affichage_resultat1)
