@@ -11,6 +11,11 @@ void setup() {
 int angle = 0; // Initialisation de la variable angle
 void loop() {
   if (Serial.available()) {
+    String msg = Serial.readStringUntil('\n');
+    msg.trim();
+    if (msg == "PING") {
+      Serial.println("PONG");
+    }
     angle = Serial.parseInt();  // Lit un entier depuis le port série
 
     // Vérifie si l'angle est dans la plage valide du moteur
