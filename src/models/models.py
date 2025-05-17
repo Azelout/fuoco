@@ -3,7 +3,7 @@ from tensorflow.keras import Model, Input
 from tensorflow.keras.layers import Conv2D, MaxPooling2D, UpSampling2D, concatenate
 
 
-def unet_model(input_size=(config["model"]["input_size"], config["model"]["input_size"], 3)):
+def unet_model(input_size= (config["model"]["input_shape"], config["model"]["input_shape"], 3)):
     inputs = Input(input_size)
 
     # Contracting path (encoder)
@@ -46,3 +46,5 @@ def unet_model(input_size=(config["model"]["input_size"], config["model"]["input
 
     return model
 
+if __name__ == "__main__":
+    unet_model()

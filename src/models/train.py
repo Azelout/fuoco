@@ -1,14 +1,16 @@
 import numpy as np
 from tensorflow.keras.saving import save_model
 from tensorflow.keras.callbacks import ReduceLROnPlateau, ModelCheckpoint
-from src.utils.utils import load_images, edit_config, get_config, show_model_stats
+from src.utils.utils import load_images, show_model_stats
 from sys import getsizeof
-from .models import unet_model
+from models import unet_model
 from config import config
+from os.path import dirname, abspath
+path = dirname(abspath(__file__))
 
-size = (config["model"]["input_shape"], config["model"]["input_shape"])
+size = (config["model"]["input_shape"], config["model"]["input_shape"], 3)
 
-def training(model_name="unet_128x128_v0_2_1"):
+def training():
     images, masks = load_images(size) # On récupère toutes les images
 
     # S'assurer que les masques ont la bonne forme (ajouter une dimension pour les canaux)
@@ -23,18 +25,17 @@ def training(model_name="unet_128x128_v0_2_1"):
 
     # Paramètrage de l'apprentissage
     reduce_lr = ReduceLROnPlateau(monitor='val_loss', factor=0.5, patience=5, min_lr=1e-6)
-    checkpoint = ModelCheckpoint(f'../model/best_model.keras', monitor='val_loss', save_best_only=True, mode='min', verbose=1) # Définir le checkpoint pour sauvegarder le meilleur modèle basé sur la validation
+    checkpoint = ModelCheckpoint(f'{path}/../../models/best_model.keras', monitor='val_loss', save_best_only=True, mode='min', verbose=1) # Définir le checkpoint pour sauvegarder le meilleur modèle basé sur la validation
 
     # Entrainer le modèle
     print("Début de l'entrainement:")
     history = model.fit(images, masks, epochs=config["training"]["epochs"], batch_size=config["training"]["batch_size"], validation_split=0.1, callbacks=[reduce_lr, checkpoint])
 
     # Sauvegarder le modèle
-    save_model(model, f'../model/{model_name}.keras')
+    save_model(model, f'{path}/../../{config["results"]["models"]}/new_{config["results"]["model_name"]}')
 
     show_model_stats(history)
 
 
-if __name__ == "__name__":
-    # training()
-    print()
+if __name__ == "__main__":
+    training()
