@@ -5,3 +5,5 @@
 *.keras
 *.h5
 *.json
+__pycache__/
+.idea/
