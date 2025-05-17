@@ -4,6 +4,9 @@ from tensorflow.keras.preprocessing.image import img_to_array, load_img
 import matplotlib.pyplot as plt
 from config import config
 
+from os.path import dirname, abspath
+path = dirname(abspath(__file__))
+
 size = (config["model"]["input_shape"], config["model"]["input_shape"])
 
 # Charger et redimensionner une image et son masque
@@ -30,12 +33,12 @@ def load_images(target_size=(size, size)):
     # Boucle sur tous les fichiers de masque
     print("Chargement des images")
     i = 0
-    for nom_fichier in listdir("../data/train/"):
+    for nom_fichier in listdir(f"{path}/../../{config['data']['train']}/"):
         if nom_fichier.endswith(".png"):  # Vérifier l'extension du fichier. Si c'est un png alors c'est un masque
             i += 1
             # Charger l'image et son masque correspondant
-            image_path = "../data/train/" + nom_fichier.replace(".png", ".jpg")
-            mask_path = "../data/train/" + nom_fichier
+            image_path = f"{path}/../../{config['data']['train']}/" + nom_fichier.replace(".png", ".jpg")
+            mask_path = f"{path}/../../{config['data']['train']}/" + nom_fichier
 
             image, mask = load_image_mask(image_path, mask_path, target_size)
 
