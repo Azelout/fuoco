@@ -9,7 +9,10 @@ from config import config
 from os.path import basename
 from os import listdir
 
-seuil = 0.150
+from os.path import dirname, abspath
+path = dirname(abspath(__file__))
+
+seuil = 0.15
 model_name = config["results"]["model_name"]
 
 def prepare_image(image_path, target_size=(128, 128)):
@@ -37,13 +40,13 @@ def image_aleatoire(img_path=None, target_size=(128, 128)):
     """
     if img_path:
         return prepare_image(img_path, target_size), img_path, basename(img_path)
-    img_list, img_name = listdir("../"+config["data"]["val"]), ""
+    img_list, img_name = listdir(path+"/../"+config["data"]["val"]), ""
     n = len(img_list)
 
     while not img_name.lower().endswith(".jpg"):
         img_name = img_list[rd.randint(0, n-1)]
 
-    return prepare_image("../"+config["data"]["val"]+"/"+img_name, target_size), ("../"+config["data"]["val"]+"/"+img_name), img_name
+    return prepare_image(path+"/../"+config["data"]["val"]+"/"+img_name, target_size), (path+"/../"+config["data"]["val"]+"/"+img_name), img_name
 
 def prediction(model_name=config["results"]["model_name"], img_path=None, target_size=(128, 128), affichage=None):
     """
@@ -55,7 +58,7 @@ def prediction(model_name=config["results"]["model_name"], img_path=None, target
     :return: None
     """
      # Chargement du modèle
-    model = load_model('../results/models/' + model_name)
+    model = load_model(path+"/../"+config["results"]["models"] + model_name)
 
     prepared_image, image_path, img = image_aleatoire(img_path=img_path, target_size=target_size)
     predicted_mask = model.predict(prepared_image, verbose=1)           ### Prediction
@@ -77,6 +80,7 @@ def prediction(model_name=config["results"]["model_name"], img_path=None, target
 
         affichage(original_image, predicted_mask_resized, predicted_mask)
 
+    return predicted_mask
 
 
 ### Affichage des résultats
@@ -166,4 +170,5 @@ def heatmap(original_image, predicted_mask_resized, predicted_mask):
     return
 
 if __name__ == "__main__":
-    prediction(affichage=affichage_resultat1)
+    print()
+    #prediction(affichage=affichage_resultat1)
