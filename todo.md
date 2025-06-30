@@ -1,6 +1,0 @@
-- Afficher des bouts de code
-- Expliquer la partie réseaux neuronnaux dans Unet
-- Moins de contexte et plus de science
-- Développer la partie robotique
-- Afficher l'arborrence du projet
-- Pourquoi Unet et pas un autre?
